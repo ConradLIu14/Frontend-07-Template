@@ -1,0 +1,140 @@
+<!-- <script>
+    alert('warninig')
+    confirm('show')
+</script> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tictactoe Overview</title>
+</head>
+<body>
+
+<style>
+    .cell{
+        width: 100px;
+        height: 100px;
+        background-color:blue;
+        display: inline-block;
+        border:solid 1px white;
+        vertical-align: middle;
+
+        line-height: 100px;
+        font-size: 50px;
+        text-align: center;
+    }
+</style>
+<div id = 'board'></div>
+<script>
+let pattern = [ // x,y 老师的写法这里可以直观的 表示行和列
+    [0,0,0],
+    [0,0,0],
+    [0,0,0],
+];
+let color = 1;
+function show(i,j){
+    let board = document.getElementById('board');
+    board.innerHTML = '';
+    for(let i =0;i<3;i++){
+        for (let j = 0;j<3;j++){
+            let cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.innerText = 
+                pattern[i][j] ==1?'X':
+                pattern[i][j]==2?'O':'';
+            cell.addEventListener("click",()=>move(i,j)); // 老师这里拐了一下，为了符合行列的习惯；然后在move拐回来,
+            board.appendChild(cell);
+        }
+        board.appendChild(document.createElement("br")); // ！或者可以给div一个正好一行排不下的宽度
+    }
+    
+}
+function move(x,y){    
+    pattern[x][y]= color; // 老师在这里拐回来了
+    // console.log(check(x,y));
+    // show(); // ？？？？？这里可以改进为 只变当前格子而不是刷新全部棋盘
+    if(check(pattern,x,y)==true){// ！调整一下顺序，先落子，再 判断
+                // ! 老师这里用了一种 穷举所有胜利可能性的算法。十分不好，改进为根据当前落子计算
+        alert(color == 1?'X is winner':'O is winner');
+    }
+    show(); // ？？？？？这里无法影响 show 和 alert顺序
+    
+    color = 3-color;
+    console.log(willWin(color));
+    if(willWin(color)){
+        console.log(color == 1?'X will win':'O will win');
+    }
+}
+
+function check(pattern,x,y){ // 这里进行了改进，省略了一个 使用{} 括起来，把全局变量转为局部变量 的技巧
+    
+    function vertical_check(){
+        let res = true;
+        for (i=0;i<3;i++){
+            if (color == pattern[i][y]){
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+        return res
+    }
+    function Hor_check(){
+        res = true;
+        for (i = 0;i<3;i++){
+            if (color==pattern[x][i]){
+                continue;
+            }
+            else{
+                return false
+            }
+
+        }
+        return res
+    }
+    function x_check(){
+            
+        res = true;
+        for (i=0;i<3;i++){
+            if(color !=pattern[i][2-i]){
+                res = false;
+                break;
+            }
+        }
+        if(res) return true;
+        for (i = 0;i<3;i++){
+            if (color ==pattern[i][i]) {
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+        return true
+    }
+    return (vertical_check() || Hor_check())||x_check();
+}
+function clone(pattern){
+    return JSON.parse(JSON.stringify(pattern));
+}
+
+function willWin(color){
+    for (ii=0;ii<3;ii++){
+        for(j=0;j<3;j++){
+            if (pattern[ii][j]){
+                continue;
+            }
+            let temp = clone(pattern);
+            temp[ii][j] = color;
+            if (check(temp,ii,j)) return true;
+        }
+    }
+    return false
+}
+show(pattern)
+</script>
+</body>
+</html>

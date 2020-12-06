@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light</title>
+</head>
+
+<body>
+    <style>
+        /* 对 CSS不太了解，所以很蠢的生成了 一堆颜色，应该有方法只更改背景颜色就可以了 */
+        .light {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            display: inline-block;
+            border: solid 1px white;
+            vertical-align: middle;
+
+        }
+
+        .lred {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            display: inline-block;
+            border: solid 1px white;
+            vertical-align: middle;
+
+        }
+
+        .lyellow {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            display: inline-block;
+            border: solid 1px white;
+            vertical-align: middle;
+
+        }
+
+        .lgreen { 
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            display: inline-block;
+            border: solid 1px white;
+            vertical-align: middle;
+
+        }
+    </style>
+    <div id="Tlight"></div>
+    <button id="next">click</button>
+    <script>
+        let lights = document.getElementById('Tlight');
+        for (let i = 0; i < 3; i++) {// 个人跟喜欢 参考tictactoe的实现， 直接 用代码生成一组 需要的elements。
+            let light = document.createElement('div');
+            light.classList.add('light');
+            light.id = i.toString();
+            lights.appendChild(light);
+        }
+
+
+        function toggle(l) { // 与其写三个不同颜色变化的函数 感觉还是写一个toggle函数 更优雅一点。
+            for (let i = 0; i < 3; i++) {
+                let the_light = document.getElementById(i.toString());
+                the_light.classList.remove('lred');
+                the_light.classList.remove('lyellow');
+                the_light.classList.remove('lgreen');
+            }
+            let the_toggle_light = document.getElementById(l.toString());
+            if (l == 0) { the_toggle_light.classList.add('lred'); }
+            if (l == 1) { the_toggle_light.classList.add('lyellow'); }
+            if (l == 2) { the_toggle_light.classList.add('lgreen'); }
+        }
+
+
+        function sleep(t) { // 这里可以用Promis.all命令，在console中等待多个promise 结果
+            return new Promise((reslove, reject) => {
+                setTimeout(reslove, t);
+            })
+        }
+        // 实现 递归调用
+        // —————————————————————————————————————回调地狱——————————————————————————————
+        // function working(){
+        //     toggle(0)
+        //     setTimeout(function(){
+        //         toggle(1)
+        //         setTimeout(function() {
+        //             toggle(2);
+        //             setTimeout(function(){
+        //                 working()
+        //             }, 5000);
+
+        //         }, 2000);
+
+        //     }
+        //     , 10000);
+        // }
+        // ————————————————————————————————promise 版本——————————————————————————————
+        // function working(){
+        //     toggle(0)
+        //     sleep(1000).then(()=>{
+        //          toggle(1);
+        //          return sleep(200);
+        //     }).then(()=>{
+        //         toggle(2);
+        //         return sleep(500);
+        //     }).then(working);
+        // }
+        // ————————————————————————————async 最优版本——————————————————————————————
+        async function working() {
+            let wait = [1000, 200, 500]
+            while (true) {
+                for (let i = 0; i < 3; i++) {
+                    toggle(i);
+                    await sleep(wait[i]);
+                }
+            }
+        }
+        // ————————————————————————————async 优势分析click 函数——————————————————————————————
+
+        // working()
+        function click(){
+
+        }
+        function happen(element,eventName){
+            return new Promise((reslove,reject)=>{
+                element.addEventListener(eventName,reslove,{once:true});
+            })
+        }
+        // 
+        let butt = document.createElement('button');
+
+        async function happen_working() {
+            while (true) {
+                toggle(0);
+                await happen(document.getElementById('next'),'click');
+                toggle(1);
+                await happen(document.getElementById('next'),'click');
+                toggle(2);
+                await happen(document.getElementById('next'),'click');
+                }
+            }
+        // ————————————————————————————generator 模拟async——————————————————————————————
+        // 和python 的迭代器思想差不错。不过 python yield 关键字 另有很多其他用处。
+        // 不用了已经
+        function* go(){
+            wait = [1000,200,500]
+            while (true) {
+                for (let i = 0; i < 3; i++) {
+                    toggle(i);
+                    yield sleep(wait[i]);
+                }
+            }
+        }
+        function run(iterator){
+            let {value,done} = iterator.next();
+            if (done){
+                return;
+            }
+            if(value instanceof Promise){
+                value.then(()=>{
+                    run(iterator);
+                })
+            }
+        }
+        function co(generator){
+            return function(){
+                return run(generator());
+            }
+        }
+
+go = co(go);
+ 
+        // ————————————————————————————async generator——————————————————————————————
+        // 生成器和 async连用
+        async function* counter(){
+            let i = 0
+            while(ture){
+                await sleep(1000);
+                yield i++;
+
+            }
+        }
+
+    
+    </script>
+</body>
+</html>

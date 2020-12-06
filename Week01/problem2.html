@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem2</title>
+</head>
+<body>
+
+<style>
+    .cell{
+        width: 100px;
+        height: 100px;
+        background-color:blue;
+        display: inline-block;
+        border:solid 1px white;
+        vertical-align: middle;
+
+        line-height: 100px;
+        font-size: 50px;
+        text-align: center;
+    }
+</style>
+<div id = 'board'></div>
+<script>
+let state = 0
+console.log('init state',state);
+
+
+function change_state(s,deepth){
+    console.log(s);
+    deepth+=1
+    if(s == 1){
+        return {
+            s:s,
+            deepth:deepth,
+        }
+    }
+    s = 1;
+    return change_state(s,deepth)
+}
+
+c = change_state(state,0);
+console.log('end state',c);
+console.log(state);
+</script>
+    
+</body>
+</html>
