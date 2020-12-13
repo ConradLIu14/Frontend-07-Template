@@ -1,0 +1,75 @@
+<script>
+    // let a = 0;
+    // let b = 1;
+    // let c = b>>1;
+    // console.log(c);
+    // console.log(c==a,c===a);
+
+    // a = 1;
+    // b = 2;
+    // c = b>>1;
+    // console.log(c);
+    // console.log(c==a,c===a);
+///////////////////////////////////////////////////////////////////////////
+class sorted{
+            constructor (data,compare){
+                this.data = data.slice();
+                this.compare = compare||((a,b)=>a-b) ;
+            }
+            take(){
+                if(this.data==undefined) console.log('this.data',undefined);
+                if(!this.data.length){
+                    return;
+                }
+                let min = this.data.shift();
+                let temp = this.data.pop();
+                this.data.unshift(temp);
+                let pointer = 0;
+                while (true){
+                    // ！！不要忘记 写break 的pointer条件
+                    // !! 不要忘记 循环最后更新 pointer 的值
+                    let next_p1 = (pointer+1)<<1;
+                    let next_p2 = next_p1-1;
+                    if(this.data[next_p1] && this.data[next_p2]){
+                        if (this.compare(this.data[next_p1],this.data[next_p2])<0) 
+                        {
+                            this.data[pointer] = this.data[next_p1];
+                            pointer = next_p1
+                        }
+                        else 
+                        {
+                            this.data[pointer] = this.data[next_p2];
+                            pointer = next_p2;
+                        }
+                        continue;
+                    }
+                    if(this.data[next_p2]){
+                        this.data[pointer] = this.data[next_p2];
+                        // this.data[next_p2] = temp;
+                        pointer = next_p2;
+                        continue;
+                    }
+                    this.data[pointer] = temp;
+                    break;
+                }
+                return min
+            }
+            give(v){
+                // this.data.push(v);
+                // if(this.data==undefined) console.log('this.data',undefined);
+                let temp=v;
+                let pointer = this.data.length;
+                this.data.push(v); // 这个赋值并不会改变 pointer 的值
+                while(pointer){// pointer 为零的时候单独处理
+                    let next_pointer = (pointer+1)>>1;
+                    next_pointer-=1;
+                    if (this.compare(this.data[next_pointer],temp)<0) return;
+                    this.data[pointer] = this.data[next_pointer];
+                    pointer = next_pointer;
+
+                }
+                this.data[0] = temp
+                return;
+            }
+        }
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try code</title>
+</head>
+<body>
+
+<style>
+    .cell{
+        width: 100px;
+        height: 100px;
+        background-color:blue;
+        display: inline-block;
+        border:solid 1px white;
+        vertical-align: middle;
+
+        line-height: 100px;
+        font-size: 50px;
+        text-align: center;
+    }
+</style>
+<div id = 'board'></div>
+<script>
+let pattern = [
+    [0,0,0],
+    [0,0,0],
+    [0,0,0],
+]
+let color = 1;
+console.log('init pattern',pattern);
+
+
+function clone(pattern){
+    return JSON.parse(JSON.stringify(pattern));
+}
+function loop(p,color){
+    // console.log('loop1',p);
+    for (let i=0;i<2;i++){
+        for (let j=0;j<2;j++){
+            if (p[i][j]){
+                // console.log('jump',i,j,color);
+                continue;
+            }
+            // p[i][j] = color;
+            // loop(p,3-color);
+
+            temp = clone(p);
+            temp[i][j] = color;
+            // console.log(i,j,color,temp);
+            loop(temp,3-color);
+            
+        }
+    }
+    console.log('end') ;
+    // pattern[0][0] +=1;
+    // console.log('loop2',p);
+}
+loop(pattern,color);
+console.log('end',pattern);
+</script>
+    
+</body>
+</html>

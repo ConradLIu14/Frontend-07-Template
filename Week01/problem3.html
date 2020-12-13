@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem2</title>
+</head>
+<body>
+
+<style>
+    .cell{
+        width: 100px;
+        height: 100px;
+        background-color:blue;
+        display: inline-block;
+        border:solid 1px white;
+        vertical-align: middle;
+
+        line-height: 100px;
+        font-size: 50px;
+        text-align: center;
+    }
+</style>
+<div id = 'board'></div>
+<script>
+let c = 0;
+function copy(c){
+    let r = c
+    return r
+}
+function loop(count){
+    if(count > 9){
+        return count
+    }
+    for(let i =0;i<3;i++){
+        count +=1
+    }
+    copy_c =copy(count);
+    console.log(count);
+    loop(copy_c);
+}
+loop(c);
+console.log("c",c);
+</script>
+    
+</body>
+</html>

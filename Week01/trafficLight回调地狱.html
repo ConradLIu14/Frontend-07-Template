@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light</title>
+</head>
+<body>
+    <style>
+        .light{
+            width: 100px;
+        height: 100px;
+        background-color:black;
+        display: inline-block;
+        border:solid 1px white;
+        vertical-align: middle;
+
+        }
+        .lred{
+            width: 100px;
+        height: 100px;
+        background-color:red;
+        display: inline-block;
+        border:solid 1px white;
+        vertical-align: middle;
+
+        }
+        .lyellow{
+            width: 100px;
+        height: 100px;
+        background-color:yellow;
+        display: inline-block;
+        border:solid 1px white;
+        vertical-align: middle;
+
+        }
+        .lgreen{
+            width: 100px;
+        height: 100px;
+        background-color:green;
+        display: inline-block;
+        border:solid 1px white;
+        vertical-align: middle;
+
+        }
+    </style>
+<div id="Tlight"></div>
+<script>
+let lights = document.getElementById('Tlight');
+// lights.classList.add('light');
+for(let i =0;i<3;i++){
+    let light = document.createElement('div');
+    light.classList.add('light');
+    light.id = i.toString();
+    lights.appendChild(light);
+}
+
+
+    function toggle(l){
+        for(let i =0;i<3;i++){
+        let the_light = document.getElementById(i.toString());
+        the_light.classList.remove('lred');
+        the_light.classList.remove('lyellow');
+        the_light.classList.remove('lgreen');
+        }
+        let the_toggle_light = document.getElementById(l.toString());
+        if (l==0) {the_toggle_light.classList.add('lred');}
+        if (l==1) {the_toggle_light.classList.add('lyellow');}
+        if (l==2) {the_toggle_light.classList.add('lgreen');}
+            }
+function working(){
+    toggle(0)
+    setTimeout(function(){
+        toggle(1)
+        setTimeout(function() {
+            toggle(2);
+            setTimeout(function(){
+                working()
+            }, 5000);
+            
+        }, 2000);
+
+    }
+    , 10000);
+}
+working()
+</script>
+</body>
+</html>
