@@ -1,0 +1,97 @@
+<script>
+    var reg = /([0-9\.]+)|([ \t]+)|([\r\n]+)|(\*)|(\/)|(\+)|(\-)/g; //正则表达式后的"g"是一个表示全局搜索选项或标记，将在整个字符串查找并返回所有匹配结果。
+    var dictionary = ["Number","WhiteSpace","LineTerminater","*","/","+","-"];
+
+    function* tokenize(source){
+        var result = null;
+        var last_index = 0;
+        while(true){
+            last_index =reg.lastIndex;
+            result = reg.exec(source);
+            console.log(last_index);
+            if(!result) break;
+            if(reg.lastIndex-last_index>result[0].length) break; // 这里最好用exception处理一下；！！！
+            let token ={
+                type:null,
+                value:null
+            }
+            
+
+            if(!result) break;
+            for(var i=1;i<=dictionary.length;i++){
+                // if(result[i]) console.log(dictionary[i-1]);
+                if(result[i]) token.type = dictionary[i-1];
+            }
+            token.value = result[0];
+            yield token;
+            // console.log(result)
+        }
+        yield{
+            type:"EOF"
+        }
+    }
+    let source = [];
+    for(let token of tokenize("10* 25/2")){
+        // console.log(token);
+        if(token.type !== "WhiteSpace"&& token.type !=="LineTerminater") source.push(token);
+
+    }
+    // tokenize("1024+10* 25");
+    function expression(tokens){
+
+    }
+    function AdditiveExpression(source){
+        if(source[o].type = "MultiplicativeExpression"){
+            let node = {
+                type:"AdditiveExpression",
+                children:[source[0]],
+            }
+            source[0] = node;
+            return AdditiveExpression(source);
+        }
+
+
+    }
+    function MultiplicativeExpression(source){ // 这里可以做成异步处理
+        console.log(source,source[0]);
+
+        if(source[0].type==='Number'){
+            let node = {
+                type:"MultiplicativeExpression",
+                children:[source[0]]
+            }
+            source[0] = node;
+            return MultiplicativeExpression(source);
+        }
+        if(source[0].type ==='MultiplicativeExpression'&&source[1]&&source[1].type==="*"){
+            let node={
+                type:"MultiplicativeExpression",
+                operator:"*",
+                children:[]
+            }
+            node.children.push(source.shift());
+            node.children.push(source.shift());
+            node.children.push(source.shift());
+            source.unshift(node);
+            return MultiplicativeExpression(source);
+        }
+        if(source[0].type ==="MultiplicativeExpression"&&source[1]&&source[1].type==="/"){
+            let node = {
+                type:"MultiplicativeExpression",
+                operator:"/",
+                children:[]
+            }
+            node.children.push(source.shift());
+            node.children.push(source.shift());
+            node.children.push(source.shift());
+            source.unshift(node);
+            return MultiplicativeExpression(source);
+        }
+        if(source[0].type ==="MultiplicativeExpression"){
+            return source[0];
+        }
+        return MultiplicativeExpression(source);// 前面的if 已经cover all situations
+    }
+    console.log(MultiplicativeExpression(source));
+
+</script>

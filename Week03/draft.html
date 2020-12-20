@@ -1,0 +1,69 @@
+<script>
+    var reg = /([0-9\.]+)|([ \t]+)|([\r\n]+)|(\*)|(\/)|(\+)|(\-)/g; // 正则表达式后的"g"是一个表示全局搜索选项或标记，将在整个字符串查找并返回所有匹配结果。
+                                                                    // 所以这里应该是一个 隐式的调用 new RegExp()
+                                                                    // 这里可以讨论一下 设计模式 迭代器模式
+    var dictionary = ["Numbers","WhiteSpace","LineTerminater","*","/","+","-"];
+
+    function tokenize(source){ // 生成器要加*
+        var result = null;
+        var last_index = 0;
+        while(true){
+            last_index =reg.lastIndex; // 这里是 reg.exec 方法的{} 等价于 RegExp对象中的 index属性。
+            // reg.lastIndex = last_index-1; // 可以手动设置
+            // console.log("reg.index - 1",reg.lastIndex)
+            reg.lastIndex = last_index;
+            result = reg.exec(source);
+            // console.log("last Index",last_index,result.index);// 这里 result 有可能是null 所以会报错，最好用exception
+            console.log("last Index",last_index);
+            console.log("result",result);
+            
+            // reg.lastIndex =11;//
+            if(!result) break;
+    }
+}
+var reg2 = /([0-9\.]+)|([ \t]+)|([\r\n]+)|(\*)|(\/)|(\+)|(\-)/;
+    function tokenize2(source){
+
+        var result = null;
+        var last_index = 0;
+        for(let i =0;i<10;i++){
+        last_index =reg2.lastIndex; // 这里是 reg.exec 方法的{} 等价于 RegExp对象中的 index属性。
+            // reg.lastIndex = last_index-1; // 可以手动设置
+            // console.log("reg.index - 1",reg.lastIndex)
+            reg2.lastIndex = last_index;
+            result = reg2.exec(source);
+            // console.log("last Index",last_index,result.index);// 这里 result 有可能是null 所以会报错，最好用exception
+            console.log("last Index",last_index);
+            console.log("result",result);
+            
+            reg2.lastIndex =11;//
+            if(!result) break;
+    }
+    }
+    function tokenize3(source){
+
+        var result = null;
+        var last_index = 0;
+        for(let i =0;i<10;i++){
+        last_index =reg.lastIndex; // 这里是 reg.exec 方法的{} 等价于 RegExp对象中的 index属性。
+            // reg.lastIndex = last_index-1; // 可以手动设置
+            // console.log("reg.index - 1",reg.lastIndex)
+            reg.lastIndex = last_index;
+            result = reg.exec(source);
+            // console.log("last Index",last_index,result.index);// 这里 result 有可能是null 所以会报错，最好用exception
+            console.log("last Index",last_index);
+            console.log("result",result);
+            
+            reg.lastIndex =11;//
+            if(!result) break;
+    }
+    }
+    console.log("tokenlize1..........................................")
+    tokenize("1024+10* 25");
+    console.log("tokenlize2........................................")
+    tokenize2("1024+10* 25")
+    console.log("tokenlize3..........................................")
+    tokenize3("1024+10* 25")
+
+
+</script>

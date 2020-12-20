@@ -1,0 +1,39 @@
+<script>
+    // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions
+    var reg = /([0-9\.]+)|([ \t]+)|([\r\n]+)|(\*)|(\/)|(\+)|(\-)/g; // 正则表达式后的"g"是一个表示全局搜索选项或标记，将在整个字符串查找并返回所有匹配结果。
+                                                                    // 没有g的话 找到第一个就不会在找第二个了，index不更新
+                                                                    // 结尾不要加一个|不然会无限循环
+                                                                    // 所以这里应该是一个 隐式的调用 new RegExp()
+                                                                    // 这里可以讨论一下 设计模式 迭代器模式                      
+    // console.log(reg);
+    var dictionary = ["Number","WhiteSpace","LineTerminal","*","/","+","-"];
+
+    function tokenize(source){
+        var result = null;
+        while(true){
+        // for(let ii =0;ii<10;ii++){
+            result = reg.exec(source); // 如果没有 会取出一个null
+            console.log('result',result);
+            console.log('source',source); // source 从始至终没有变化
+            if(!result) break;
+            for(var i=1;i<=dictionary.length;i++){
+                if(result[i]) console.log(dictionary[i-1]);
+            }
+        }
+        // disscussion 1
+//         for(let i =0;i<10;i++){ 
+// 1 ["+", undefined, undefined, undefined, undefined, undefined, "+", undefined, index: 4, input: "1024+10* 25", groups: undefined]0: "+"1: undefined2: undefined3: undefined4: undefined5: undefined6: "+"7: undefinedgroups: undefinedindex: 4input: "1024+10* 25"length: 8__proto__: Array(0)
+// 2 ["10", "10", undefined, undefined, undefined, undefined, undefined, undefined, index: 5, input: "1024+10* 25", groups: undefined]0: "10"1: "10"2: undefined3: undefined4: undefined5: undefined6: undefined7: undefinedgroups: undefinedindex: 5input: "1024+10* 25"length: 8__proto__: Array(0)
+// 3 ["*", undefined, undefined, undefined, "*", undefined, undefined, undefined, index: 7, input: "1024+10* 25", groups: undefined]
+// 4 [" ", undefined, " ", undefined, undefined, undefined, undefined, undefined, index: 8, input: "1024+10* 25", groups: undefined]
+// 5 ["25", "25", undefined, undefined, undefined, undefined, undefined, undefined, index: 9, input: "1024+10* 25", groups: undefined]
+// 6 null
+// 7 ["1024", "1024", undefined, undefined, undefined, undefined, undefined, undefined, index: 0, input: "1024+10* 25", groups: undefined]
+// 8 ["+", undefined, undefined, undefined, undefined, undefined, "+", undefined, index: 4, input: "1024+10* 25", groups: undefined]
+// 9 ["10", "10", undefined, undefined, undefined, undefined, undefined, undefined, index: 5, input: "1024+10* 25", groups: undefined]
+//             console.log(i,reg.exec(source));
+//         }
+// end discussion
+    }
+    tokenize("1024+10* 25");
+</script>

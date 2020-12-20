@@ -1,0 +1,88 @@
+<script>
+    var reg = /([0-9\.]+)|([ \t]+)|([\r\n])|(\+)|(\-)|(\*)|(\/)/g;
+    var dictionary = ["Number","Whitespace","LineTerminate","+","-","*","/"];
+
+    function* tokenize(source){
+        let result = null;
+        while(true){
+            result = reg.exec(source);
+            if (!result) break;
+            let token = {
+                type:null,
+                value:null,
+            }
+            for(let i =1;i<=7;i++){
+                if(result[i]){
+                    token.type = dictionary[i-1];
+                    token.value = result[i];
+                }
+            }
+            yield token;
+        }
+    }
+    var s1 = "1*5 /3 *2";
+    let res = []
+    for(let token of tokenize(s1)){
+        if(token.type !="Whitespace"&&token.type!="LineTerminate"){
+            res.push(token);
+        }
+    }
+    console.log(res);
+
+    
+    function MultiplicativeExpression(source){
+        console.log(source[1],source[0],source);
+        if(source instanceof Array ===false) return false;
+        let node = {
+            type:null,
+            operator:null,
+            children:[],
+        }
+        if(source[0].type==="Number"){
+            node.type = "MultiplicativeExpression";
+            node.children=[source[0]];
+            source[0] = node
+            // return MultiplicativeExpression(source)
+        }
+        else if(source[0].type=="MultiplicativeExpression"&&source[1]&&source[1].type==="*"){// 这里改写成 async
+            node.type = "MultiplicativeExpression";
+            node.operator="*",
+            node.children=[source.shift()]; 
+            node.children.push(source.shift());
+            node.children.push(source.shift());
+            source.unshift(node);
+            // return MultiplicativeExpression(source)
+        }
+        else if(source[0].type=="MultiplicativeExpression"&&source[1]&&source[1].type==="/"){// 这里改写成 async
+            node.type = "MultiplicativeExpression";
+            node.operator="/",
+            node.children=[source.shift()]; 
+            node.children.push(source.shift());
+            node.children.push(source.shift());
+            source.unshift(node);
+            // return MultiplicativeExpression(source)
+        }
+        else if(source[0].type ==="MultiplicativeExpression"){
+            return source[0];
+        }
+    }
+    // console.log(MultiplicativeExpression(res));
+    function makePromise(res){
+        return new Promise((reslove,reject)=>{
+          if(MultiplicativeExpression(res)==false) reject(false);
+           MultiplicativeExpression(res);
+           reslove(res);
+        })
+    };
+    async function run_Mul(){
+        while(true){
+            console.log(res,res.length);
+            if(res.length ===1) break;
+            await makePromise(res);
+            // await makePromise(false)
+        }
+    }
+    // run_Mul(res);
+    console.log(run_Mul(res));
+
+</script>
