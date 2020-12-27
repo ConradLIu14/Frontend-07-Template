@@ -1,0 +1,25 @@
+<script>
+    let a;
+        let b = new Promise((resolve, reject) => {
+            console.log('promise1');
+            resolve();
+            console.log('promise2');
+        }).then(() => {
+            console.log('promise3');
+        })
+        let c = 0;
+        a = new Promise(async (resolve, reject) => {
+            await b;
+            c+=1;
+            console.log('after1');
+            console.log('a', a);resolve(true);
+            await a;
+            console.log('a',a)
+            
+            // 想问一下 为什么这之后的都不会执行！!!!
+            console.log('22222')
+            c+=1;
+            console.log('after2');
+        })
+        console.log('end');
+</script>

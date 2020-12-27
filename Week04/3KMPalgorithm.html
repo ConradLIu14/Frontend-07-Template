@@ -1,0 +1,44 @@
+<script>
+    function KMP(source,pattern){
+        let table = new Array(pattern.length).fill(0);
+        let i = 1,j = 0;
+        while(i<pattern.length){
+            if(pattern[i]===pattern[j])
+            {
+                ++j,++i;
+                table[i]=j;
+            }else{
+                if(j>0){
+                    j = table[j];
+                }
+                else {
+                    ++i;
+                }
+            }
+        }
+        // console.log(table);
+        {
+            let i = 0,j=0;
+            while(i<source.length){
+               
+                if(pattern[j]===source[i]){
+                    ++i,++j
+                }
+                else{
+                    if(j>0){// 在table 开头加一个[-1](变成[-1]+table) 这样这里就不用判断if else 了 
+                        j = table[j];// 变模式串的pointer，source串的pointer 不变
+                    }
+                    else{
+                        ++i;
+                    }
+                } 
+                if(j === pattern.length){
+                    return true;
+                }
+            }return false;
+        }
+        
+    }
+console.log(KMP("Hello","ll"));
+
+</script>

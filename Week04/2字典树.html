@@ -1,0 +1,56 @@
+<script>
+    let $ = Symbol("$"); // 用 Sybol 处理 截止符 是一种更好的方式
+    class Trie{
+        
+        constructor(){
+            this.root = Object.create(null);// 避免受到js prototype 上的污染
+        }
+        insert(word){
+            let node = this.root;
+            for (let c of word){
+                if(!node[c]){
+                    node[c] = Object.create(null);
+                }
+                node = node[c]
+            }
+            // if(!("$"in node)) // 截止符
+                // node["$"] = 0;
+            // node["$"]++
+
+            // 加了line2 有关Symbol 的代码之后就可以直接使用￥符号了
+            if(!($ in node ))
+                node[$] = 0;
+            node[$]++
+        }
+        most(){
+            let max = 0;
+            let maxWord = null;
+            let visit = (node,word)=>{
+                if(node[$] &&node[$]>max){
+                    max = node[$];
+                    maxWord=word;
+                }
+                for(let p in node){
+                    visit(node[p],word+p);
+                }
+            }
+            visit(this.root,"");
+            console.log(maxWord,max);
+        }
+    }
+    function randomWord(length){
+        var s = "";
+        for(let i = 0;i<length;i++){
+            s+=String.fromCharCode(Math.random()*26+'a'.charCodeAt(0));// String.fromCharCode() unicode 转字符   
+                                                                       // 这里是float 不是int 不严格等于也没关系。。
+        }
+        // console.log(length,'s',s);
+        return s
+    }
+    let trie = new Trie();
+    for(let i =0;i<100000;i++){
+        // console.log(randomWord(4));
+        // randomWord(4);
+        trie.insert(randomWord(4));
+    }
+</script>
