@@ -1,0 +1,23 @@
+<script>
+    let object = {
+        a:1,
+        b:2
+    }
+    let pro = new Proxy(object,{
+        set(obj,prop,val){
+            console.log('set',obj,prop,val);
+            obj[prop] = val
+            return obj[prop]
+        },
+        get(obj,prop){
+            console.log('get',obj,prop);
+            return obj[prop];
+
+        }
+    })
+
+pro.a = 3;
+console.log(pro.a,pro);
+pro.f = 100;
+console.log(pro.f,pro); // 还有很多其他hook 需要考虑清楚
+</script>

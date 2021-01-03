@@ -1,0 +1,15 @@
+<script>
+    // function 先定义 后定义都可以；
+    let a = set_value(5)
+    function set_value(val){
+        return val;
+    }
+    console.log(a);
+    b = set_value(10)
+    console.log(b);
+
+    effect(()=>{
+        console.log('affact');
+    })
+    effect()
+</script>
