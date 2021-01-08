@@ -1,0 +1,29 @@
+Object in Javascript
+原型链
+obj：[property],[property],[[prototype]]
+
+js 的属性是一个KV对。 key 可以是 sybmol 可以是 string；Symbol 只能通过变量取引用；Symbol 即使值一样，也是不相等的。
+Symbol       Data
+        => 
+String       Accessor
+
+js 属性有两种状态 一种是值属性 一种是访问器属性
+
+Data property                   Accessor Property
+Value                           get
+writeable                       Set
+enumerable                      enumerable
+configurable                    configurable
+
+原型机制
+object => object => object 访问属性的时候，如果找不到，沿着原型链取找原型
+
+Object API/Grammer
+·{} [] Object.defineProperty
+·Object.create / Object.setProperty/ Object.getPropertyOf
+·new / class /extends
+·new / function / property
+
+function Object 除了一般对象属性和原型 还有一个call; 如果没有call 会报错
+
+

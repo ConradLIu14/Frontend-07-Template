@@ -1,0 +1,33 @@
+·String
+    ·Character a
+    ·Code Point 97
+    ·Encoding 01100001
+
+·字符编码方式 （在JavaScript中，所有的string类型（或者被称为DOMString）都是使用UTF-16编码的。）
+    ·ASCAII
+    ·Uncidoe
+    ·UCS
+    ·GB
+        ·GB2312
+        ·GBK
+        ·GB18030
+    ·ISO-8859
+    ·BIG5
+    有很多编码方式，必须提前规定好。也可以根据 常用频率来猜测。
+·String--·Encoding
+    ·UTF
+    UTF8 8bit             一   1110 0100        10 111000        10 000000
+                                    表示三个字节 （10） 表示自己开头  表示自己开头              
+    UTF16 16bit           一   01001110 00000000
+
+·String Grammer
+    "abc"
+    'abc'
+    `abc`
+    A regular Expression to match string literal
+·String Grammer Terminate
+    `ab${x}abc${y}abc`
+    ·`ab${
+    ·}abc${
+    ·}abc`
+

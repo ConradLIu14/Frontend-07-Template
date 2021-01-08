@@ -1,0 +1,15 @@
+现代语言特例
+C++ *表示指针或者乘号
+VB < 表示小于或者XML直接量
+Python 行首的Tab 空格
+Javascript 里面/可能是除号，可能是正则表达式开头
+
+语言分类
+形式语言-用途
+·编程描述语言：JSON；HTML；XAML；SQL；CSS；
+·编程语言：c;C++;Java;Javascript;Pyton;C#
+
+形式语言-表达方式
+·声明式语言：JSON；HTML；XAML；CSS；Lisp；
+·命令式语言：C；C++；Java；C#；
+

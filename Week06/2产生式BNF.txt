@@ -1,0 +1,49 @@
+BNF 产生式的一种表示方法
+
+用尖括号括起来的名称表示语法结构名
+
+语法结构分为基础结构和需要用其他语法结构定义的复合结构
+基础结构称为终结符
+复合结构称为非终结符
+
+引号和中间字符来表示终结符（字符串）
+
+*表示可以重复多次
+|表示或
++表示至少一次
+
+产生式（BNF）
+1+2*3 
+终结符:Number;+;-;*;/;
+非终结符：MultiplicativeExpression;AddtiveExpression;
+
+BNF：
+<MultiplicativeExpression>::=<Number>|<MultiplicativeExpression>"*"<Number>|<MultiplicativeExpression>"/"<Number>|
+<AddtiveExpression>::=<MultiplicativeExpression>|<AddtiveExpression>"+"<MultiplicativeExpression>|<AddtiveExpression>"-"<MultiplicativeExpression>|
+
+带括号的BNF:
+<BracketExpression>::="("<AdditveExpression>")"|Number
+<MultiplicativeExpression>::=<Number>|<MultiplicativeExpression>"*"<Number>|<MultiplicativeExpression>"/"<Number>|<BracketExpression>"*"<Number>|<BracketExpression>"/"<Number>
+<AddtiveExpression>::=<MultiplicativeExpression>|<AddtiveExpression>"+"<MultiplicativeExpression>|<AddtiveExpression>"-"<MultiplicativeExpression>|
+For Example:Mul
+  (5+3*7)/2 -5
+  => (MultiplicativeExpression+MultiplicativeExpression)/2 - 5 //先看source[0] 如果source[0] =='(" 就看下一位source[1];
+  => (AdditiveExpression)/2 - 5
+  => BracketExpression/2 - 5 // 网友答案到这里就结束了；但是，我给MultiplicativeExpression 加了 比如<MultiplicativeExpression>"*"<Number> 所以可以继续
+  => MultiplicativeExpression-5
+  => AdditiveExpression
+
+带括号的BNF:(我觉得比较直观好理解但是并不简洁的表示方法)
+<MultiplicativeExpression>::=<Number>|<MultiplicativeExpression>"*"<Number>|<MultiplicativeExpression>"/"<Number>|
+<LeftBracketExpression>::="("<MultiplicativeExpression>|<LeftBracketExpression>"+"<MultiplicativeExpression>|<LeftBracketExpression>"-"<MultiplicativeExpression>
+<BracketExpression>::=<MultiplicativeExpression>|<LeftBracketExpression>")"|
+<BreackMultiplicativeExpression>::=<BracketExpression>|<BreackMultiplicativeExpression>"*"<BracketExpression>|<BreackMultiplicativeExpression>"/"<BracketExpression>|
+<AddtiveExpression>::=<BreackMultiplicativeExpression>|<AddtiveExpression>"+"<BreackMultiplicativeExpression>|<AddtiveExpression>"-"<BreackMultiplicativeExpression>|                                    
+
+For Example:
+  (5+3*7)/2 -5
+  => (MultiplicativeExpression+MultiplicativeExpression)/2 - 5 
+  => LeftBracketExpression)/2 - 5   
+  => BracketExpression/2 - 5 
+  => BracketMultiplicativeExpression-5 （省略了上步将 2 变成MultiplicationExpression 再变成BracketExpression 的步骤）
+  => AdditiveExpression          （同省略）
