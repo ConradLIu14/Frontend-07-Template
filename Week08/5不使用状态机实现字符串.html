@@ -1,0 +1,17 @@
+<script>
+    function find_str(str_in){
+
+        for(let i = 0;i<str_in.length-6;i++){
+            // console.log(i,str_in.slice(i,i+6))
+            if(str_in.slice(i,i+6)==='abcdef'){
+                console.log('find',i)
+                return true
+            }
+        }
+        console.log('not found')
+        return false
+    }
+    
+    console.log(find_str('bcaabcdefghijk'))
+    console.log(find_str('bcaabcdeghijk'))
+</script>

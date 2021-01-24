@@ -1,0 +1,216 @@
+<script>
+    let a = 'abcdefghijklmn'
+    console.log(a.slice(0,6))
+//////////////////////////////////////////////
+    print('1abc')// function 可以 在声明前使用
+    function print(p_in){
+        console.log(p_in)
+    }
+    let p = print// 但是 p 这个变量不可以
+    p('2abc')
+////////////////////////////////////////////////////////////
+console.log(print.name,print.name==='print')
+//////////////////////////////////////////////////////////////////////////////////////
+for(let i =0;i<10;i++){
+    for(let ii = 0;ii<5;ii++){
+        console.log(i,ii)
+        if(ii ===2) break
+    }
+}
+///////////////////////////////////////////////////////////////////////////////////
+function person(name) {
+    　　　　this.name = name;
+    　　}
+let ps = []
+for(let i =0;i<10;i++){
+    person.prototype.callName = function(){
+        console.log(this.name)
+    }
+    let name = 'person'+String(i)
+    let p = new person(name)
+    ps.push(p)
+}
+for(let i of ps){
+    i.callName()
+}
+////////////////////////////////////////
+function f_try(str_in){
+    console.log(str_in)
+}
+f_try.name = 'ff'
+// let f = ff // 这里会报错!!!!!!!
+// f('this is f')
+/////////////////////////////////////////////////////////
+function getTable(str_in){
+        if(str_in.length ===1) return [0]
+        if(str_in.length ===2) return [0,0]
+        let substr_counts = [0,0]
+        for(let i =2;i<=str_in.length-1;i++){
+            let curr_substr = str_in.slice(0,i)
+            let count = 0
+            // console.log(curr_substr)
+            for(let ii = 1;ii<=curr_substr.length-1;ii++){// 这里用-- 好一点不过先不改了
+                // console.log(curr_substr.slice(0,ii),curr_substr.slice(curr_substr.length-ii,curr_substr.length))
+                if(curr_substr.slice(0,ii)===curr_substr.slice(curr_substr.length-ii,curr_substr.length)) count=ii
+            }
+            substr_counts.push(count)
+        }
+        return substr_counts
+    }
+let the_str = 'abababx'
+let states = []
+let jTable = getTable(the_str)
+console.log('jTable',jTable)
+function end(c_in){
+    return end
+}
+function state(n){
+    // if(n === 0) this.name = 'start'
+    // else if(n>=the_str.length) this.name = 'end'
+    // else this.name = 'state' + String(n)
+
+    if(n>=the_str.length) this.name = 'end'
+    else this.name = 'state' + String(n)
+    this.n = n
+
+    this.next_state = function(c_in){
+        console.log('cin',c_in,this.n)
+        if (c_in === the_str[n]){
+            if(n<=jTable.length-2) return new state(n+1)
+            else {
+                console.log('find end')
+                return end}
+        }
+        else{
+            if(this.n ===undefined) return 'undefined'
+            if(this.n === 0) return new state(0)
+            let jump = new state(jTable[this.n])
+
+            console.log(this.n,'jump to '+String(jTable[this.n]))
+            return jump.next_state(c_in)
+        }
+    }
+}
+// !!!!!!!
+let curr_state = new state(0)
+console.log(curr_state.name,curr_state.next_state('a'),curr_state.next_state('b'))
+curr_state = new state(1)
+console.log(curr_state.name,curr_state.next_state('a'),curr_state.next_state('b'))
+for(let i = 0;i<=the_str.length-1;i++){
+    curr_state = new state(i)
+    console.log(curr_state.name,curr_state.next_state(the_str[i]),curr_state.next_state('z'))
+}
+let str_in = 'abcdeadbdeadeabcaabababxbxabcdeefase'
+// let str_in = 'abcdeadbdeadeabcdeefase'
+curr_state = new state(0)
+console.log('abcdeadbdeadeabcaabababxbxabcdeefase.....................................')
+let res = false
+for(let i=0;i<=str_in.length-1;i++){
+    console.log(i,str_in[i],curr_state,'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    if(curr_state === true){
+        console.log('find')
+        break
+    }
+    curr_state = curr_state.next_state(str_in[i])
+    if(curr_state === end){
+        res = true
+        console.log(true)
+        break
+    }
+}
+console.log(res)
+
+///////////////////////////////////////////////////////////////////////////////////////////
+// {
+//     function person(name){
+//         this.name = name
+//         this.callName = function(){
+//             console.log(this.name)
+//         }
+//     }
+//     let p1 = new person('Mike')
+//     p1.callName()
+// }
+
+
+</script>
+
+
+
+<script>
+        function getTable(str_in){
+        if(str_in.length ===1) return [0]
+        if(str_in.length ===2) return [0,0]
+        let substr_counts = [0,0]
+        for(let i =2;i<=str_in.length-1;i++){
+            let curr_substr = str_in.slice(0,i)
+            let count = 0
+            // console.log(curr_substr)
+            for(let ii = 1;ii<=curr_substr.length-1;ii++){// 这里用-- 好一点不过先不改了
+                // console.log(curr_substr.slice(0,ii),curr_substr.slice(curr_substr.length-ii,curr_substr.length))
+                if(curr_substr.slice(0,ii)===curr_substr.slice(curr_substr.length-ii,curr_substr.length)) count=ii
+            }
+            substr_counts.push(count)
+        }
+        return substr_counts
+    }
+    console.log(getTable('ababc'))
+    console.log(getTable('abababx'))
+    // 然后根据 上面生存的表格生成state
+    // 直接用构造函数法就可以了
+    // let states = []
+
+    
+function find_str3(str_in,pattern){
+
+function end(c_in){
+    return end
+}
+let the_str = pattern
+function state(n){
+    // if(n === 0) this.name = 'start'
+    // else if(n>=the_str.length) this.name = 'end'
+    // else this.name = 'state' + String(n)
+
+    if(n>=the_str.length) this.name = 'end'
+    else this.name = 'state' + String(n)
+    this.n = n
+
+    this.next_state = function(c_in){
+        // console.log('cin',c_in,this.n)
+        if (c_in === the_str[n]){
+            if(n<=jTable.length-2) return new state(n+1)
+            else {
+                return end}
+        }
+        else{
+            if(this.n ===undefined) return 'undefined'
+            if(this.n === 0) return new state(0)
+            let jump = new state(jTable[this.n])
+
+            console.log(this.n,'jump to '+String(jTable[this.n]))
+            return jump.next_state(c_in)
+        }
+    }
+}
+    let jTable = getTable(pattern)
+    
+    let curr_state = new state(0)
+    let res = false
+    for(let i of str_in){
+        // console.log(curr_state,i)
+    if(curr_state === true){
+        return true
+    }
+    curr_state = curr_state.next_state(i)
+    if(curr_state === end){
+        res = true
+        break
+    }
+}
+return res
+}
+
+console.log(find_str3('abcdeadbdeadeabcaabababxbxabcdeefase','abababx'),true) 
+console.log(find_str3('abcdeadbdeadeabcdeefase','abababx'),false) 
+</script>

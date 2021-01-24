@@ -1,0 +1,41 @@
+
+<script>
+    // 写个简单的 abc的吧
+    function find_str(str_in){
+        let state = start
+        for(let i of str_in){
+            state = state(i)
+        }
+        // return state.key &&state.key === 'find_str_end'// 这里能直接比吗？？？？？
+        return state.name === 'end'
+    }
+    function start(c_in){
+        if(c_in==='a'){
+            return findA
+        }
+        else{
+            return start
+        }
+    }
+    function findA(c_in){
+        if(c_in ==='b'){
+            return findB
+        }
+        else {
+            // return start     // 这里 不好，因为 如果是find的状态的话，应该用start状态 测试当前字符，而不是直接把此字符跳过
+            return start(c_in)} 
+    }
+    function findB(c_in){
+        if (c_in==='c'){return end}
+        else{return start(c_in)}// 这里 和start 的情况一样 不好，因为 如果 是find的状态的话，应该用start状态 测试当前字符，而不是直接把此字符跳过
+    }
+    function end(c_in){// 这是一个trap进入end状态以后再也不会出来进入其他状态了
+                        
+        return end
+    }
+
+    console.log(find_str('ababc'),true)
+    console.log(find_str('defabcdef'),true)
+    console.log(find_str('efgadec'),false)
+
+</script>

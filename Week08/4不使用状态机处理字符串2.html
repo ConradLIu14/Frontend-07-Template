@@ -1,0 +1,15 @@
+<script>
+    // 找到字符 ab
+    function findab(str_in){
+        for (let i=0;i<str_in.length-1;i++){
+            if(str_in[i] === 'a' && str_in[i+1] ==='b'){
+                console.log('find ab',i)
+                return true
+            }
+        }
+        console.log('not found')
+        return false
+    }
+    console.log(findab('acdab'))
+    console.log(findab('acdae'))
+</script>
