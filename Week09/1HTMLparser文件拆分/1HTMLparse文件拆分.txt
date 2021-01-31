@@ -1,0 +1,6 @@
+通过parse 生成dom 树
+然后CSS computing 变成带有CSS的DOM 树
+
+然后经过layout 进行渲染 出现一个bitmap
+
+parse第一步拆分文件
