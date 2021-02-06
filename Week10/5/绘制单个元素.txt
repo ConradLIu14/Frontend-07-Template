@@ -1,0 +1,9 @@
+绘制 用到一个images 库
+·绘制单个元素
+1.server 端改造
+2 所有浏览器，用viewport绘制。有一个视口的概念
+
+·绘制需要依赖一个图形环境
+·这里采用npm包images
+·绘制时在viewPort上进行
+·与绘制相关的属性有background-color;border;background-image 等等
