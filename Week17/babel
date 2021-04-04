@@ -1,0 +1,7 @@
+全局有一个babel 命令
+babel 命令需要输入和输出
+安装：
+npm install --save-dev @babel/core @babel/cli 装到本地，-g 装到全局
+
+babel配置方法,可以手工指定，也可以存到一个特定的文件里面。
+可以放在一个叫做.babelrc 里面存一个json 形式。

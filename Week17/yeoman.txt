@@ -1,0 +1,45 @@
+脚手架 generator （不是工具链）
+yeoman 脚手架生成器。
+
+
+router 用来创建比较复杂的generator。不是必须要创建的。
+
+
+创建好index.js 以后，可以执行npm link 命令。把自定义模块link 到npm 标准里面去。
+每次修改完都要执行npm link 
+package.json 中name 要以'generator-' 开头
+"yeoman-environment": "^3.1.0",
+"yeoman-generator": "^5.2.0"      => "yeoman-generator": "^4.10.0"
+
+
+同步method 也可以，异步method 也可以. 可以写一些命令行来用于交互。
+    method1() {
+        this.log('method 1 just ran');
+    }
+
+    method2() {
+        this.log('method 2 just ran');
+    }
+    async method{
+
+    }
+
+youman命令 yo + ....和文件进行交互
+输入：通过 如下文件模板系统生成文件
+this.promopt
+            this.fs.copyTpl(
+                this.templatePath('t.html'),
+                this.destinationPath('public/index.html'),
+                { title: 'Templating with Yeoman' }
+              )
+
+yeoman依赖系统，对npm进行了一个简单得包装，用起来更舒适
+npm install 创建一个依赖。把package.json 加入进去 
+
+initPackage extendJSON
+this.fs.extendJSON(this.destinationPath('package.json'), pkgJson);
+
+
+装完可以install 一下
+this.yarnInstall(['lodash'], { 'dev': true });
+

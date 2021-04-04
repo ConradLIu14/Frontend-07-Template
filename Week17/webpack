@@ -1,0 +1,36 @@
+webpack 把node 代码打包成为浏览器可用得代码。也有很多基于html 的打包工具，
+对配置就不会有很高要求
+
+webpack 打包一个 js 然后html 手动去引用这个.js
+
+webpack 可以作多文件合并，可以用loader 和 plugin
+
+安装webpack  1. 安装webpack-cli 这个包提供命令2.webpack
+全局安装
+npm install -g "webpack-cli"
+npm uninstall -Q webpack-cli
+npm uninstall -Q webpack
+
+npm install webpack-cli -g 这个安装还是没有webpack 命令
+npm install webpack -g webpack 包也要安上
+项目安装
+npm install webpack-cli --save-dev
+npx webpack
+
+loader 是 webpack 的灵魂
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
