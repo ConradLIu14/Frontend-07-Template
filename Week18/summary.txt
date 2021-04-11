@@ -1,0 +1,69 @@
+最流行的测试工具和配套设施： Mocha 以及 jest 测试框架以及coverage 相关工具
+1. 安装 npm 安装
+new folder test demo; npm init
+然后全局安装                   局部安装
+npm install --global mocha              npm install --save-dev mocha
+testadd.js some comments: 
+    mocha 最早是node 所以，不require assert 不支持 import export； describe 什么的都没有用，只需要it;describe 是给测试分目录分组的时候用的；assert 是测试用的
+    输入测试和标准答案
+    需要把 add export出去，在testadd.js 中把add import 进去
+    然后 terminal 输入命令: mocha 然后我们发现命令通过了。
+    也可以多写一些，并且将it 放入describe 中去。
+
+
+
+2. 引入babel
+解决 add 必须写成一个node模块的问题; babel register 提供了一些解决方案； 安装babel/core 和 babel/register 两个模块然后require一下就可以了;
+在terminal 直接用mocha 调用会出错。但是用一个mocha参数调用就可以了。mocha --require @babel/register 
+这里要注意，因为mocha 是全局安装，所以，会有not found 的问题。解决方法，直接调用local mocha 就可以了。./node_modules/.bin/mocha 就可以了。
+注意windows.\node_modules\.bin\mocha --require @babel\register  文件分隔符号要反过来 
+永远最好调用当前的 工具。依赖环境安装的工具是一个坏习惯。
+
+此时没有规定babel转换为什么版本，所以还有写一个config文件(为啥我这里直接就工作正常了？？)
+在texst目录下面写一个.babellrc 文件,定义preset. 然后执行命令npm install @babel/preset-env
+
+将add.js 改成export add {...} 这种export 模式
+因为add里面是exprot 形式,所以对应addtest 也应该写成import 形式: import {add} from "./add.js" (add.js 也要改成 export add)
+如果是 exprot default 就不用写了
+
+node .js 非常注重测试,可以把测试命令写到 testdemo/package.json 里面. scripts:{test:........} 然后npm run test 就可以了
+
+npc:github.com/istanbuljs/nyc
+然后 codeCoverage mocha 里面没有
+现在我们有了一些test case 但是我们并不知道 test case 写的好不好,以及有没有测试完全
+code coverage 表示测试覆盖了原文件的那些代码.新的工具nyc
+
+首先安装一下nyc;首先来到命令行;npm install --save-dev nyc (vscode 需要npm 安装成global 的,以后再研究一下)
+测试的时候就用nyc + 命令行: nyc .\node_modules\.bin\mocha --require @babel/register 
+nyc run test 也是可以的
+
+然后带上babel 跑nyc; 先换成 import. 这时候 跑不起来了. 需要写一个新插件 nycrc
+其中babel 的插件叫babel-plugin-istanbul     用npm 安装一下就可以了
+在nycrc 中加入extends 
+{
+    "extends": "@istanbuljs/nyc-config=babel,
+}
+
+在babelrc 中加入
+{
+    "extends": "@istanbuljs/nyc-config=babel,
+    "plugins":["istanbul"]
+}
+
+然后也可以把npc 的命令加入package.json
+{
+    ...
+    "scripts":{
+        "test":"mocha ..
+        "coverage": "nyc mocha" 
+    }
+}
+然后直接 npm run coverage 就可以了
+
+
+generator 将所有的全部继承到 generator 中去.
+
+
+
+
+
