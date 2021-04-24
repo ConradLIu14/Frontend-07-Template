@@ -1,0 +1,35 @@
+---------------------------------------------------首先配置环境-----------------------------------------------------------------------
+1. 新建 jsx 文件夹,并在jsx 下面初始化 npm 环境
+2. 安装 webpack 以及webpack相关依赖;链接...
+3. 本地安装 babel
+4. 创建webpage config
+4. 配置一个入口 main.js
+5. webpack一下; 配置启动方式,然后启动
+6. 为了方便调试 安装 webpack-serve
+
+-----------------------------------------------初步建立动画和时间线------------------------------------------------------------------
+1. 将carousel独立成一个文件;创建一个新类animation.js 写动画;16ms 一帧是常识
+2. 现代浏览器一般都支持animationFrame;有时候也叫rAF 就是申请浏览器执行下一帧的时候执行这个代码
+3. 现代浏览器最好用tick 而不是setInterval 因为setInterval 不可控; setInterval 也有可能发生积压;所以要requestAnimationFrame来做这种重复一帧一帧的重复
+ . reuestAnimationFrame 对应有一个 cancelAnimationFrame
+4. 接下来写timeline class;一般来说一个timeLine 有一个start 就ok 了; 不会有一个stop;但是可能会有pause or resume;
+5. 然后可能会有rate set rate 和 get rate 这个不是所有的时间线都会提供.
+6. tick function 还是私有一点好.所以写到constructon 里面; 把TICK 作为一个Symbol 常量藏起来;animation 之外任何部分都没有办法访问这个 Symbol
+7. 实现动画animation;属性动画和帧动画;一般不通过属性来做. 
+8. 把时间要存起来避免前后时间不一致.因为Date.now() 是实时变化的.
+9. 消除 超过 100s 的问题.
+
+-----------------------------------------让animation 库变得真正可用-----------------------------------------------------------
+1. 把animation 的 delay 放到时间线的里面; 在运行中添加t0
+2. pause resume
+3. delay 和timing function
+4. 状态管理. robustness; 乱调 resume 也不会抛错.
+-------------------------gesture -----------------------------------
+1. 轮播图 carusel 中 微小拖拽也可以产生位移,并不是一个很好的实现. 也要统一触屏和鼠标的体验,也要支持基本得手势区分
+
+
+
+
+1. 时间管理 
+2. 鼠标操作
+3. 鼠标事件
