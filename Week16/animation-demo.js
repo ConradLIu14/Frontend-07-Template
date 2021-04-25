@@ -1,0 +1,12 @@
+import {TimeLine,Animation} from "./animation.js"
+import {ease,easeIn} from "./ease.js"
+
+let tl = new TimeLine();
+tl.start();
+
+tl.add(new Animation(document.querySelector("div").style ,"transform", 0, 500, 2000,0, easeIn, v => `translateX(${v}px)`))// 不加 v 是执行不了的
+document.querySelector('#pause-btn').addEventListener("click", () => tl.pause());
+document.querySelector('#resume-btn').addEventListener("click", () => tl.resume());
+document.querySelector("#el2").style.transition = "transform ease-in 2s"
+document.querySelector("#el2").style.transform = "translateX(500px)"
+
