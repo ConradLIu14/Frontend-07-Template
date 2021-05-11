@@ -1,0 +1,28 @@
+Animation
+1. @keyframes定义
+2. animation:使用
+
+attributes
+animation-name 时间曲线
+animation-duration 动画的时长
+animation-timing-function 动画的时间曲线
+animation-delay 动画开始前的延迟
+animation-iteration-count 动画的播放次数
+animation-direction 动画的方向
+
+关键帧可以使用 from to 或者 %（百分比）；两种方法大致等价：from 0% to 100%
+@keyframes mykf{
+    0%{top:0;transition:top ease}
+    50%{top:30px;transition:top ease-in}
+    75%{top:10px;transition:top ease-out}
+    100%{top:0;transition:top linear}
+}
+
+使用tarnsition function 这样每个关键帧的timing function 都可以不用特别一样
+
+transition-property 要变换的任务
+transition-duration 变换的时长
+transition-timing-function 时间曲线
+transition-delay 延迟
+
+timing function 来自于三次贝塞尔曲线 可以参考cubic-bezier.com

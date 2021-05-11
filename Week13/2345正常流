@@ -1,0 +1,81 @@
+三代排版技术 layout 也叫布局
+1.正常流 2. flex 3.grid 用的还不多。
+正常流 能力最差，但是比flex 还有复杂。
+
+正常流：排两样东西1.盒 2.文字
+思考:如何写字。
+1. 从左向右2.同行字对齐 3.一行写满了换到下一行。
+正常流排版
+
+1.收集盒进 行（hang）
+2.计算盒在行中的排布
+3.计算行的排布
+
+行内 从左向右排，对齐规则文字以及 inline-box  本行（hang) 叫做行盒line-box
+块级盒 自己独占一行 block-level-box
+
+
+行级排布
+1 baseline
+text 文本字符如何定义 freeType c++底层库
+行模型 最重要的五条线：
+line-top text-top base-line text-bottom line-bottom
+
+
+text-top text-bottom 由最大的字体决定。
+盒的先后顺序和尺寸 都会影响line-top 和line-bottom 的位置。不会影响 text-top text-bottom
+
+
+正常流块级排布
+float 其实已经补推荐使用了。
+float 与 clear：float 就是先把元素排到某一个位置然后根据float 元素占据的区域调整行盒的位置。float 会影响行盒的尺寸。
+float影响多行。
+float 受到上一个float影响。
+clear 属性和让float属性强制换行。
+float 是不认识br 的
+
+
+BFC margin重叠；重叠出来的高度和margin最大的高度相等，margin collapse
+
+
+BFC合并
+Block Container：
+Block levelbox：
+blockbox = block container + blcok-level box
+
+Block Container
+blcok
+inline-block
+table-cell
+flex item
+grid cell
+table-caption
+
+display:为Block Container;inline-blcok;table-cell; 都是block container。
+ flex（里面是flex item 没有特殊的display 就是正常流）
+
+grid 是youcell 所以默认是
+
+blcok level:                                Inline level:
+display:blcok                                       display:inline-block
+display:flex                                        display:inline-flex
+display:table                                       display:inline-table
+display:grid                                        display:inline-grid
+...                                                 ...
+
+设立BFC
+floats 
+absolutely positioned element
+block containers (such as inline-blcoks,table-cells,and table-capions)
+that are not block boxes,
+flex items
+grid cells
+....
+and blcok boxes with 'overflow' other than visible.
+
+BFC合并
+block box && overlfow:visible
+BFC 合并与float
+BFC 合并与边距重叠
+
+里外都是BFC 并且overflow 是visible 

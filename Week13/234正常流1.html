@@ -1,0 +1,139 @@
+<div>这里可以很简单的观察到基线div stylecode:style="font-size:50px;line-height:100px;background-color:pink;"</div>
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+</div>
+
+<div>我们给它加入一个盒,inlinebox stylecode:
+    style="line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block"</div>
+<div>很明显盒子的下边缘和基线对齐</div>
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+    <div style="line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block"></div>
+</div>
+
+<div>我们给它加入一个盒,inlinebox stylecode:
+    style="line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block"</div>
+<div>加入文字以后inline-block基线变了,所以不建议使用基线对齐</div>
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+    <div style="line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block;">a</div>
+</div>
+
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+    <div style="line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block;">a</br>b</div>
+</div>
+
+
+<div>使用vertical-align对齐；top 是和行顶对齐</div>
+<div>顶部对齐，然后撑开</div>
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+    <div
+        style="vertical-align:top;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</div>
+</div>
+
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+    <div
+        style="vertical-align:top;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+</div>
+
+<div>使用vertical-align对齐；middle bottom 同理</div>
+<div>底部对齐，然后撑开</div>
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+    <div
+        style="vertical-align:middle;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+</div>
+
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+    <div
+        style="vertical-align:bottom;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+</div>
+
+
+<div>使用vertical-align对齐；text-top text-bottom 同理</div>
+<div>text-top text-bottom 对齐然后撑开</div>
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+    <div
+        style="vertical-align:text-top;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+</div>
+
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <span>Hello good 中文</span>
+    <div
+        style="vertical-align:text-bottom;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+</div>
+
+
+<div>使用画中心线的小技巧；使用套嵌是因为 不能加入排版，要放到上面去；红线后面是visible 的所以就现实出来了 </br>
+    按照
+</div>
+
+<div>虽然被撑开，但是其实中心线是没有变化的。只有top 和bottom 有变化</div>
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <div style="vertical-align:middle;overflow:visible;display:inline-block;width:1px;height:1px">
+        <div style="width:1000px;height: 1px;background:red"></div>
+    </div>
+    <div style="vertical-align:top;overflow:visible;display:inline-block;width:1px;height:1px">
+        <div style="width:1000px;height: 1px;background:yellow"></div>
+    </div>
+    <div style="vertical-align:bottom;overflow:visible;display:inline-block;width:1px;height:2px">
+        <div style="width:1000px;height: 1px;background:blue"></div>
+    </div>
+    <span>Hello good 中文</span>
+    <div
+        style="vertical-align:top;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+        <div
+        style="vertical-align:bottom;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+</div>
+<div>这里换一下 vertical-align 的div 顺便，把bottom放在前面。文字自己就跑到下面去对齐去了</div>
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <div style="vertical-align:middle;overflow:visible;display:inline-block;width:1px;height:1px">
+        <div style="width:1000px;height: 1px;background:red"></div>
+    </div>
+    <div style="vertical-align:top;overflow:visible;display:inline-block;width:1px;height:1px">
+        <div style="width:1000px;height: 1px;background:yellow"></div>
+    </div>
+    <div style="vertical-align:bottom;overflow:visible;display:inline-block;width:1px;height:2px">
+        <div style="width:1000px;height: 1px;background:blue"></div>
+    </div>
+    <span>Hello good 中文
+    </span>
+    <div
+        style="vertical-align:bottom;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+        <div
+        style="vertical-align:top;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+</div>
+
+
+<div style="font-size:50px;line-height:100px;background-color:pink;border: 1px solid black;">
+    <div style="vertical-align:text-bottom;overflow:visible;display:inline-block;width:1px;height:1px">
+        <div style="width:1000px;height: 1px;background:red"></div>
+    </div>
+    <div style="vertical-align:text-top;overflow:visible;display:inline-block;width:1px;height:1px">
+        <div style="width:1000px;height: 1px;background:red"></div>
+    </div>
+    <span>Hello good 中文</span>
+    <div
+        style="vertical-align:text-bottom;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+<div
+        style="vertical-align:text-top;line-height:70px;width:100px;height:150px;background-color:aqua;display:inline-block">
+        a</br>b</div>
+</div>
+</div>
+
