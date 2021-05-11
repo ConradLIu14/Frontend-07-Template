@@ -1,0 +1,56 @@
+CSS规则
+·选择器
+·声明
+    ·Key
+    ·Value
+
+for exmaple：一个最常见的CSS规则
+div{
+    background-color:blue;
+}
+
+由上可知；CSS分成了声明部分declaration和选择器selector部分
+
+CSS规则
+•Selector
+    •https://www.w3.org/TR/selectors-3/           level3 是目前实现的比较好的版本
+    •https://www.w3.org/TR/selectors-4/           level4 还在制定的途中
+    ·selector 分为selector_group selector 以及simple_selector
+•Key
+    •Properties
+    •Variables:https://www.w3.org/TR/css-variables/•Value•https://www.w3.org/TR/css-values-4/       新key 值 以双减号开头
+•Value
+    •https://www.w3.org/TR/css-values-4/                  不同属性要求不同的value
+    ·可以是calc 可以是number 可以是length ect..
+其实key value 都是declartion
+
+selector level3 
+selector 的连接符 可以是>;<sp> 空格； +； ~波浪线 四种
+我们可以看到CSS3 的选择器的根元素是 selectors-group
+selectors-group 是由COMMA(也就是逗号) 分隔的selector 构成
+也就是说平时写selector的时候 逗号是优先级最低的。它的结合性是排在最后的。
+
+然后每一个selector 是由simple_selector_sequence 构成，
+simple_selector_sequence 是由combinator 相连接的，combinator有加号、大于号、波浪线以及最经担的空格选择器。
+simple_selector 背后是简单的连接符，它会有：type 类型;* 星; .; #;[] 属性; :伪类；:: 伪元素；:not() not;
+
+simple_selector_sequence 是由简单选择器构成的，简单选择器有类型选择器，或者是星号（universal)
+然后可以是简单选择器 hash(带#) class(.) attrib(方括号) pseudo （伪类和为元素选择器，以单冒号或者双冒号开头）negation （带not 的选择器，以:NOT 开头）
+至少要有一个选择器，如果有类型选择器或者星号的话必须在最前，简单选择器必须至少有一个
+
+
+key 的部分
+Variable 基本用法 我们去声明一个双减号开头的variable -- 然后我们就可以在子元素里面使用这个Variable 我们用var 这个函数然后后面跟着的属性名不需要引号
+variable 可以作用在任何一个局部，也可以和其他函数进行一个嵌套
+可以给var 一个默认值找不到的时候就会给出默认值
+变量除了可以用作value 还可以用作key
+
+value 部分
+
+
+
+
+
+
+
+

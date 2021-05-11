@@ -1,0 +1,17 @@
+建立学习线索；CSS非常复杂，找不到一份现行的标准。所以学好CSS更需要找到好的线索。
+编程语言的语法从来都是一个非常好的线索。CSS现行标准是分散的，所以很难找到完整语法。CSS2.1 是一个完整语法:资源见pdf
+
+CSS2.1 产生式： 用方括号 代表一个组的概念；'?' 代表可以存在可以不存在；'|' 表示 or 的关系；'*'表示一个或多个
+CHARSET = @charset CDO CDC 是HTML 注释的起点和终止符，这是一个历史包袱。以前可以把 CSS变成HTML 注释
+
+ruleset 就是普通的CSS规则；media(CSS3 的media功能要复杂的多);page 页面信息
+
+CSS总体结构
+@charset # 一般都是定义好的，并不需要特意去声明；编码风格，一般用endcoding转换成ASCII 编码
+@import
+rules
+    media
+    page
+    rule
+at rult '@+rule' 普通rule 就是： 'rule'
+

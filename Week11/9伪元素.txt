@@ -1,0 +1,29 @@
+表示在元素内容的前或者后 插入 伪元素
+一旦使用 before或者after 属性declaration 里面就可以写一个content 的属性。不正常的元素没有办法写content
+before 或者 after 一旦写了content属性，就会像真正的DOM元素一样可以去生成盒，参与后续的排版和渲染了
+·::before       
+·::after
+
+这两个元素是原本存在了content。选中第一行（或者第一个字母）第一行是已经完成排版之后的一个结果，所以如果是在toy browser 中去实现的话，大家
+可能还要动一动脑筋。
+并不是添加不存在元素，而是用一个不存在的元素把一部分文本括起来让我们可以对它进行一些处理
+·::first-line
+·::first-letter
+
+两种机制，一种无中生有，一种把现存的括起来
+
+::before ::after
+before 给实际选中的一个元素前面增加了一个元素，通过它的content属性可以对它添加文本内容
+在实现一些组件的时候，也会常常使用这种不污染DOM树，但是可以创造实际效果的方式来给页面添加一些修饰性的内容
+
+
+::fist-letter 和 ::first-line 是怎样工作的
+<div><::first-letter>c</::first-letter> contentcontentcontentcontent
+contentcontentcontentcontent
+contentcontentcontentcontent
+contentcontentcontentcontent
+contentcontentcontentcontent
+contentcontentcontentcontent</div>
+
+
+first-line 和 first-letter 支持的属性不一样的
